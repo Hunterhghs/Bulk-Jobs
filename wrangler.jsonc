@@ -1,0 +1,33 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "bulk-jobs",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-04-17",
+  "compatibility_flags": ["nodejs_compat"],
+  "minify": true,
+
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "bulk-jobs-db",
+      "database_id": "PLACEHOLDER_D1_ID"
+    }
+  ],
+
+  "triggers": {
+    "crons": ["0 6 * * *"]
+  },
+
+  "observability": {
+    "logs": {
+      "enabled": true,
+      "invocation_logs": true,
+      "head_sampling_rate": 1
+    }
+  },
+
+  "vars": {
+    "MAX_COMPANIES_PER_RUN": "250",
+    "REQUEST_TIMEOUT_MS": "8000"
+  }
+}

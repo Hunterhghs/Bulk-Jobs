@@ -1,0 +1,18 @@
+{
+  "name": "bulk-jobs",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Personalized remote job board aggregator — fetches from Greenhouse, Ashby, Lever, Workable, Breezy, Recruitee, SmartRecruiters, Personio",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:init": "wrangler d1 execute bulk-jobs-db --file=./schema.sql",
+    "db:trigger": "curl -s https://bulk-jobs.hunterhghs.workers.dev/api/trigger"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250417.0",
+    "typescript": "^5.7.0",
+    "wrangler": "^4.11.0"
+  }
+}
