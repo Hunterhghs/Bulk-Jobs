@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Job Board Directory — Remote US &amp; EU Platforms</title>
+<meta name="description" content="Curated directory of remote job boards for US &amp; EU roles — high volume, low competition, free access. Business, operations, writing, and freelance categories.">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #fcfcfb;
+    --card: #ffffff;
+    --text: #1a1a1a;
+    --muted: #6b6b6b;
+    --border: #eae6e0;
+    --accent: #1b5e3f;
+    --accent-soft: #e8f5ee;
+    --accent-hover: #145230;
+    --blue: #1a56db;
+    --blue-soft: #e8f0fe;
+    --amber: #b45309;
+    --amber-soft: #fef7ed;
+    --purple: #6d28d9;
+    --purple-soft: #f5f0ff;
+    --shadow: 0 1px 2px rgba(0,0,0,.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,.06);
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Masthead ── */
+  .masthead {
+    text-align: center;
+    padding: 56px 24px 40px;
+  }
+  .masthead h1 {
+    font-size: 2.1rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    margin-bottom: 10px;
+    color: var(--text);
+  }
+  .masthead .subtitle {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 620px;
+    margin: 0 auto 20px;
+    line-height: 1.5;
+  }
+  .masthead .stats {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .stat {
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 500;
+  }
+  .stat.green { background: var(--accent-soft); color: var(--accent); }
+  .stat.blue  { background: var(--blue-soft);   color: var(--blue); }
+  .stat.amber { background: var(--amber-soft);  color: var(--amber); }
+  .stat.purple{ background: var(--purple-soft); color: var(--purple); }
+
+  /* ── Layout ── */
+  .container {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 24px 64px;
+  }
+
+  /* ── Section ── */
+  .section { margin-bottom: 48px; }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--accent);
+  }
+  .section-header.blue  { border-bottom-color: var(--blue); }
+  .section-header.amber { border-bottom-color: var(--amber); }
+  .section-header h2 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .section-header .count {
+    font-size: 0.82rem;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .section-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+
+  /* ── Card Grid ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 12px;
+  }
+  .card-grid.featured {
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  }
+
+  /* ── Card ── */
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: var(--shadow);
+    transition: box-shadow .15s, border-color .15s, transform .12s;
+    position: relative;
+  }
+  .card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+  .card.featured { border-left: 3px solid var(--accent); }
+  .card .name {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .card .name .fav { font-size: 0.75rem; }
+  .card .domain {
+    font-size: 0.78rem;
+    color: var(--accent);
+    font-weight: 500;
+    word-break: break-all;
+  }
+  .card .desc {
+    font-size: 0.84rem;
+    color: var(--muted);
+    line-height: 1.45;
+  }
+  .card .tags {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+  .tag {
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: #f3f1ed;
+    color: #5f5a50;
+    font-weight: 500;
+  }
+  .tag.free   { background: var(--accent-soft); color: var(--accent); }
+  .tag.eu     { background: var(--blue-soft);   color: var(--blue); }
+  .tag.high   { background: var(--amber-soft);  color: var(--amber); }
+  .tag.premium{ background: var(--purple-soft); color: var(--purple); }
+  .tag.star   { background: #fefce8; color: #a16207; }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    padding: 32px 24px;
+    border-top: 1px solid var(--border);
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .footer a { color: var(--accent); text-decoration: none; font-weight: 500; }
+  .footer a:hover { text-decoration: underline; }
+
+  /* ── Responsive ── */
+  @media (max-width: 640px) {
+    .masthead { padding: 36px 16px 28px; }
+    .masthead h1 { font-size: 1.55rem; }
+    .card-grid, .card-grid.featured { grid-template-columns: 1fr; }
+    .container { padding: 0 16px 48px; }
+  }
+
+  /* ── Print ── */
+  @media print {
+    .card { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+    .masthead { padding: 20px 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ MASTHEAD ═══ -->
+<header class="masthead">
+  <h1>Remote Job Board Directory</h1>
+  <p class="subtitle">
+    A curated launchpad of remote job platforms for US &amp; EU roles — hand-picked for low competition, high signal-to-noise, and free access. Business, operations, writing, and freelance.
+  </p>
+  <div class="stats">
+    <span class="stat green">36 Platforms</span>
+    <span class="stat blue">US &amp; EU Remote</span>
+    <span class="stat amber">Free Access</span>
+    <span class="stat purple">Low Competition</span>
+  </div>
+</header>
+
+<!-- ═══ CONTENT ═══ -->
+<div class="container">
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- SECTION 1: Daily Drivers                    -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-header">
+      <h2>⭐ Daily Drivers</h2>
+      <span class="count">9 platforms</span>
+    </div>
+    <p class="section-desc">
+      These are your go-to boards — the ones you check every day. Strong remote focus, good volume, easy to browse, and consistently deliver quality roles.
+    </p>
+    <div class="card-grid featured">
+      <a href="https://hiringcafe.com" target="_blank" rel="noopener" class="card featured">
+        <span class="name"><span class="fav">⭐</span> HiringCafe</span>
+        <span class="domain">hiringcafe.com</span>
+        <span class="desc">AI-powered search across 1,750+ company career pages. Salary, experience, and benefits filters. No LinkedIn reposts — direct from employer ATS.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag star">Top Pick</span><span class="tag">AI Search</span></span>
+      </a>
+      <a href="https://himalayas.app" target="_blank" rel="noopener" class="card featured">
+        <span class="name"><span class="fav">⭐</span> Himalayas</span>
+        <span class="domain">himalayas.app</span>
+        <span class="desc">Clean, vetted remote job board with excellent timezone, role type, and salary filtering. Beautiful UX. 100K+ remote jobs.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag star">Top Pick</span><span class="tag">Vetted</span></span>
+      </a>
+      <a href="https://remoteleaf.com" target="_blank" rel="noopener" class="card featured">
+        <span class="name">RemoteLeaf</span>
+        <span class="domain">remoteleaf.com</span>
+        <span class="desc">39K+ jobs scraped from 10K+ company career pages. Jobs not on LinkedIn. API available for programmatic access.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag">API</span><span class="tag">39K+ Jobs</span></span>
+      </a>
+      <a href="https://www.workingnomads.com" target="_blank" rel="noopener" class="card featured">
+        <span class="name">Working Nomads</span>
+        <span class="domain">workingnomads.com</span>
+        <span class="desc">Curated remote job digest with strong business, management, and operations categories. Less crowded than the major boards.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag">Digest</span><span class="tag">Business Ops</span></span>
+      </a>
+      <a href="https://jobicy.com" target="_blank" rel="noopener" class="card featured">
+        <span class="name">Jobicy</span>
+        <span class="domain">jobicy.com</span>
+        <span class="desc">Quality-focused remote job aggregator covering US &amp; EU markets. Strong BA and analytics categories.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag">Aggregator</span><span class="tag">US &amp; EU</span></span>
+      </a>
+      <a href="https://owlapply.com" target="_blank" rel="noopener" class="card featured">
+        <span class="name">OwlApply</span>
+        <span class="domain">owlapply.com</span>
+        <span class="desc">Remote job search with smart filtering. Tracks applications and saves searches for efficient daily workflow.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag">Application Tracker</span></span>
+      </a>
+      <a href="https://euremotejobs.com" target="_blank" rel="noopener" class="card featured">
+        <span class="name">EU Remote Jobs</span>
+        <span class="domain">euremotejobs.com</span>
+        <span class="desc">Focused exclusively on European remote positions. Filter by country, timezone, and work authorization. Clean DOM for scraping.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag eu">EU Focus</span><span class="tag">Country Filter</span></span>
+      </a>
+      <a href="https://remotifyeurope.com" target="_blank" rel="noopener" class="card featured">
+        <span class="name">Remotify Europe</span>
+        <span class="domain">remotifyeurope.com</span>
+        <span class="desc">European remote job platform focused on compliance and timezone-aligned roles. Cross-border EU setups.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag eu">EU Compliance</span><span class="tag">Cross-Border</span></span>
+      </a>
+      <a href="https://my.greenhouse.io/dashboard" target="_blank" rel="noopener" class="card featured">
+        <span class="name">Greenhouse Jobs</span>
+        <span class="domain">my.greenhouse.io/dashboard</span>
+        <span class="desc">Company career pages powered by Greenhouse ATS. Apply direct to employer — bypasses mass-apply funnels entirely.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag premium">Direct ATS</span><span class="tag">No Middleman</span></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- SECTION 2: High-Volume Aggregators          -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-header">
+      <h2>📊 High-Volume Aggregators</h2>
+      <span class="count">6 platforms</span>
+    </div>
+    <p class="section-desc">
+      Massive job volumes — use with keyword alerts and salary filters to cut through the noise. Best for daily scanning.
+    </p>
+    <div class="card-grid">
+      <a href="https://www.remoterocketship.com" target="_blank" rel="noopener" class="card">
+        <span class="name">Remote Rocketship</span>
+        <span class="domain">remoterocketship.com</span>
+        <span class="desc">172K+ jobs from 60K+ company career pages. 37% of jobs not on LinkedIn. Updated weekly.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag high">172K+ Jobs</span></span>
+      </a>
+      <a href="https://remote4me.com" target="_blank" rel="noopener" class="card">
+        <span class="name">Remote4Me</span>
+        <span class="domain">remote4me.com</span>
+        <span class="desc">Aggregates 20+ job boards, pre-filters for 100% remote (not hybrid). Non-tech categories well covered.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag">20+ Sources</span><span class="tag">True Remote</span></span>
+      </a>
+      <a href="https://remoteok.com" target="_blank" rel="noopener" class="card">
+        <span class="name">Remote OK</span>
+        <span class="domain">remoteok.com</span>
+        <span class="desc">One of the largest remote job aggregators globally. Use keyword filters for analyst, operations, business.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag high">High Volume</span></span>
+      </a>
+      <a href="https://www.skipthedrive.com" target="_blank" rel="noopener" class="card">
+        <span class="name">SkipTheDrive</span>
+        <span class="domain">skipthedrive.com</span>
+        <span class="desc">27K+ remote jobs from 2.7K+ companies. Dedicated Analyst, Admin, and Business Development categories.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag">27K+ Jobs</span></span>
+      </a>
+      <a href="https://dailyremote.com" target="_blank" rel="noopener" class="card">
+        <span class="name">DailyRemote</span>
+        <span class="domain">dailyremote.com</span>
+        <span class="desc">228K+ remote jobs. 73% not on LinkedIn/Indeed. Free browsing, premium for hidden listings.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag high">228K+ Jobs</span></span>
+      </a>
+      <a href="https://remotive.com" target="_blank" rel="noopener" class="card">
+        <span class="name">Remotive</span>
+        <span class="domain">remotive.com</span>
+        <span class="desc">Hand-curated remote jobs with salary bands. 135K+ listings, 11K added weekly. RSS + API available.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag">API + RSS</span><span class="tag">Salary Bands</span></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- SECTION 3: EU-Focused Platforms             -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-header blue">
+      <h2>🇪🇺 EU-Focused Platforms</h2>
+      <span class="count">6 platforms</span>
+    </div>
+    <p class="section-desc">
+      Platforms with strong European presence. Regional filtering eliminates incompatible global applicants — your timezone is your leverage.
+    </p>
+    <div class="card-grid">
+      <a href="https://eures.europa.eu" target="_blank" rel="noopener" class="card">
+        <span class="name">EURES</span>
+        <span class="domain">eures.europa.eu</span>
+        <span class="desc">Official EU government portal. 100K+ jobs, zero spam, no bots. Underutilized by remote seekers. Multi-language.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag eu">EU Official</span><span class="tag">100K+ Jobs</span></span>
+      </a>
+      <a href="https://www.europelanguagejobs.com" target="_blank" rel="noopener" class="card">
+        <span class="name">Europe Language Jobs</span>
+        <span class="domain">europelanguagejobs.com</span>
+        <span class="desc">Multilingual jobs across Europe. Customer support, marketing, sales, and business categories. Mobile app available.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag eu">Multilingual</span></span>
+      </a>
+      <a href="https://www.welcometothejungle.com" target="_blank" rel="noopener" class="card">
+        <span class="name">Welcome to the Jungle</span>
+        <span class="domain">welcometothejungle.com</span>
+        <span class="desc">European platform with detailed company profiles. Strong in France, Germany, UK. Expanding across EU.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag eu">Company Profiles</span></span>
+      </a>
+      <a href="https://landing.jobs" target="_blank" rel="noopener" class="card">
+        <span class="name">Landing.jobs</span>
+        <span class="domain">landing.jobs</span>
+        <span class="desc">Lisbon-based European tech job platform. Personalized matching, visa/relocation support. 4,500+ placed.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag eu">EU Tech</span></span>
+      </a>
+      <a href="https://freelancermap.com" target="_blank" rel="noopener" class="card">
+        <span class="name">freelancermap</span>
+        <span class="domain">freelancermap.com</span>
+        <span class="desc">DACH-focused freelance platform. 15.7K+ projects, 0% commission. Clients: BMW, Siemens, SAP, Deutsche Telekom.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag eu">DACH</span><span class="tag">Enterprise</span></span>
+      </a>
+      <a href="https://www.escapethecity.org" target="_blank" rel="noopener" class="card">
+        <span class="name">Escape the City</span>
+        <span class="domain">escapethecity.org</span>
+        <span class="desc">UK purpose-driven exec roles. Flex hours, async, 4-day week, remote trips. 2K+ active roles.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag eu">UK Focus</span><span class="tag">Purpose-Driven</span></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- SECTION 4: Curated & Hand-Vetted            -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-header">
+      <h2>✨ Curated &amp; Hand-Vetted</h2>
+      <span class="count">5 platforms</span>
+    </div>
+    <p class="section-desc">
+      Human or automated filters strip out spam, MLM, and fake roles. Lower competition — no 1-click apply means fewer mass-appliers.
+    </p>
+    <div class="card-grid">
+      <a href="https://remote.co" target="_blank" rel="noopener" class="card">
+        <span class="name">Remote.co</span>
+        <span class="domain">remote.co</span>
+        <span class="desc">Established remote-only board with company vetting. Good for mid-level business and operations roles.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag">Vetted</span></span>
+      </a>
+      <a href="https://jobspresso.co" target="_blank" rel="noopener" class="card">
+        <span class="name">Jobspresso</span>
+        <span class="domain">jobspresso.co</span>
+        <span class="desc">Hand-curated — each listing manually reviewed. Bootstrapped and indie SaaS companies. Less traffic than big boards.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag">Hand-Picked</span></span>
+      </a>
+      <a href="https://justremote.co" target="_blank" rel="noopener" class="card">
+        <span class="name">JustRemote</span>
+        <span class="domain">justremote.co</span>
+        <span class="desc">Curated remote listings. Power Search uncovers hidden roles not widely advertised. Business, PM, CS.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag">Power Search</span></span>
+      </a>
+      <a href="https://workew.com" target="_blank" rel="noopener" class="card">
+        <span class="name">Workew</span>
+        <span class="domain">workew.com</span>
+        <span class="desc">Hand-picked remote jobs. 275+ current listings, 1M+ monthly visitors. Dedicated Ops and Support categories.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag">Hand-Picked</span></span>
+      </a>
+      <a href="https://nodesk.co/remote-jobs/" target="_blank" rel="noopener" class="card">
+        <span class="name">NoDesk</span>
+        <span class="domain">nodesk.co/remote-jobs</span>
+        <span class="desc">Clean, minimal remote job board. Digital nomad focus. Covers business, operations, analyst roles. Newsletter available.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag">Minimal</span></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- SECTION 5: Startup & Direct-Match           -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-header">
+      <h2>🚀 Startup &amp; Direct-Match</h2>
+      <span class="count">4 platforms</span>
+    </div>
+    <p class="section-desc">
+      Apply directly to founders and hiring managers — no HR screeners. Profile-creation barrier filters out bots and mass-appliers.
+    </p>
+    <div class="card-grid">
+      <a href="https://wellfound.com" target="_blank" rel="noopener" class="card">
+        <span class="name">Wellfound (AngelList)</span>
+        <span class="domain">wellfound.com</span>
+        <span class="desc">The startup hiring platform. 8M+ matches. Filter by salary, equity, remote. Direct to founder. 150K jobs.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag">Startups</span><span class="tag">Direct to Founder</span></span>
+      </a>
+      <a href="https://otta.com" target="_blank" rel="noopener" class="card">
+        <span class="name">Otta</span>
+        <span class="domain">otta.com</span>
+        <span class="desc">Modern matching for startups and scale-ups. Salary transparency and company culture insights built in.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag">Startups</span><span class="tag">Salary Transparency</span></span>
+      </a>
+      <a href="https://dynamitejobs.com" target="_blank" rel="noopener" class="card">
+        <span class="name">Dynamite Jobs</span>
+        <span class="domain">dynamitejobs.com</span>
+        <span class="desc">Remote-only since 2017. Vetted remote-first companies. SMB focus — COO, Director of Ops roles.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag">SMB Focus</span></span>
+      </a>
+      <a href="https://peoplefirstjobs.com" target="_blank" rel="noopener" class="card">
+        <span class="name">People-First Jobs</span>
+        <span class="domain">peoplefirstjobs.com</span>
+        <span class="desc">Only lists roles at companies vetted for remote-friendly, async, outcome-oriented culture. Tiny but elite pool.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag">Culture-Vetted</span></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- SECTION 6: Freelance & Contract             -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-header amber">
+      <h2>💼 Freelance &amp; Contract</h2>
+      <span class="count">4 platforms</span>
+    </div>
+    <p class="section-desc">
+      Independent contracting and consulting platforms. Portfolio-driven with project-based hiring — less saturated than Upwork/Fiverr.
+    </p>
+    <div class="card-grid">
+      <a href="https://contra.com" target="_blank" rel="noopener" class="card">
+        <span class="name">Contra</span>
+        <span class="domain">contra.com</span>
+        <span class="desc">Commission-free independent contractor platform. Strong for business consulting, PM, and operations — not just dev.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag">0% Commission</span></span>
+      </a>
+      <a href="https://www.peopleperhour.com" target="_blank" rel="noopener" class="card">
+        <span class="name">peopleperhour</span>
+        <span class="domain">peopleperhour.com</span>
+        <span class="desc">UK-heavy (~60%). 3M freelancers, $150M earned. EU-friendly payments. Less saturated than Upwork.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag">UK/EU</span></span>
+      </a>
+      <a href="https://www.virtualvocations.com" target="_blank" rel="noopener" class="card">
+        <span class="name">Virtual Vocations</span>
+        <span class="domain">virtualvocations.com</span>
+        <span class="desc">Remote-only board with hand-screened listings. Strong for BA, data entry, and operations coordinator roles.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag">Hand-Screened</span></span>
+      </a>
+      <a href="https://gun.io" target="_blank" rel="noopener" class="card">
+        <span class="name">Gun.io</span>
+        <span class="domain">gun.io</span>
+        <span class="desc">Vetted talent platform for high-stakes technical and ops roles. Vetting process reduces competition significantly.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag">Vetted</span></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- SECTION 7: Niche & Writing                  -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-header">
+      <h2>✍️ Niche &amp; Writing</h2>
+      <span class="count">5 platforms</span>
+    </div>
+    <p class="section-desc">
+      Specialized platforms for writers, editors, content strategists. Ultra-low competition — these boards are hidden gems most job seekers overlook.
+    </p>
+    <div class="card-grid">
+      <a href="https://problogger.com/jobs" target="_blank" rel="noopener" class="card">
+        <span class="name">ProBlogger Jobs</span>
+        <span class="domain">problogger.com/jobs</span>
+        <span class="desc">Gold standard niche writing board since 2004. RSS feed available for earliest access to new listings.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag">RSS</span><span class="tag">Writing</span></span>
+      </a>
+      <a href="https://jobs.superpath.co" target="_blank" rel="noopener" class="card">
+        <span class="name">Superpath Job Board</span>
+        <span class="domain">jobs.superpath.co</span>
+        <span class="desc">Content marketing specific. Backed by large Slack community with active #jobs channel.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag">Content Marketing</span></span>
+      </a>
+      <a href="https://www.mediabistro.com/jobs" target="_blank" rel="noopener" class="card">
+        <span class="name">Mediabistro</span>
+        <span class="domain">mediabistro.com/jobs</span>
+        <span class="desc">Media/creative industry focus. Writing, editing, PR, and content creator roles. Well-known in media circles.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag">Media</span></span>
+      </a>
+      <a href="https://www.kolabtree.com" target="_blank" rel="noopener" class="card">
+        <span class="name">Kolabtree</span>
+        <span class="domain">kolabtree.com</span>
+        <span class="desc">20K PhD freelancers. Hyper-niche science, medical, and regulatory writing. Clients: NASA, Moderna, Biogen.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag">Science/Medical</span></span>
+      </a>
+      <a href="https://www.idealist.org" target="_blank" rel="noopener" class="card">
+        <span class="name">Idealist</span>
+        <span class="domain">idealist.org</span>
+        <span class="desc">200K+ nonprofit jobs. 30 years old. Executive Director, Finance, Comms, Marketing, Program Management.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag">Nonprofit</span></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- SECTION 8: Specialty & 4-Day Week           -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-header">
+      <h2>🔬 Specialty &amp; Alternative</h2>
+      <span class="count">5 platforms</span>
+    </div>
+    <p class="section-desc">
+      Unique angles — 4-day work weeks, women-focused, work-from-anywhere, and built-in tech hubs. Lower traffic, high-quality listings.
+    </p>
+    <div class="card-grid">
+      <a href="https://4dayweek.io" target="_blank" rel="noopener" class="card">
+        <span class="name">4 Day Week</span>
+        <span class="domain">4dayweek.io</span>
+        <span class="desc">712+ active 4-day-week jobs at full pay. Finance, Ops, Sales, CS, Product, HR categories.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag">4-Day Week</span></span>
+      </a>
+      <a href="https://www.remotewoman.com" target="_blank" rel="noopener" class="card">
+        <span class="name">RemoteWoman</span>
+        <span class="domain">remotewoman.com</span>
+        <span class="desc">Women-focused remote job aggregator. Browse free. Less saturated applicant pool.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag">Women-Focused</span></span>
+      </a>
+      <a href="https://www.realworkfromanywhere.com" target="_blank" rel="noopener" class="card">
+        <span class="name">RealWorkFromAnywhere</span>
+        <span class="domain">realworkfromanywhere.com</span>
+        <span class="desc">Curated work-from-anywhere jobs. RSS feeds available. Tiny set, very high quality.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag">RSS</span></span>
+      </a>
+      <a href="https://builtin.com/jobs" target="_blank" rel="noopener" class="card">
+        <span class="name">Built In</span>
+        <span class="domain">builtin.com/jobs</span>
+        <span class="desc">City-by-city tech/startup jobs. VP/director level roles. Remote/hybrid/on-site filters. 50K+ jobs.</span>
+        <span class="tags"><span class="tag free">Free</span><span class="tag">Tech/Startup</span></span>
+      </a>
+      <a href="https://www.flexjobs.com" target="_blank" rel="noopener" class="card">
+        <span class="name">FlexJobs</span>
+        <span class="domain">flexjobs.com</span>
+        <span class="desc">Subscription ($2.95 trial) but paywall eliminates 95% of competition. Every listing hand-screened — no scams.</span>
+        <span class="tags"><span class="tag premium">Paid Trial</span><span class="tag">Hand-Screened</span><span class="tag">No Scams</span></span>
+      </a>
+    </div>
+  </section>
+
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  Curated by <a href="https://hheuristics.com">H Heuristics</a> &middot; 36 platforms &middot; Last updated July 2025
+</footer>
+
+</body>
+</html>
