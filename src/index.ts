@@ -316,7 +316,7 @@ const FRONTEND_HTML = `<!DOCTYPE html>
 
 <script>
 const API = '/api/jobs';
-let currentPage = 0, limit = 100, totalJobs = 0;
+let currentPage = 0, limit = 50, totalJobs = 0;
 let activeFilters = { category:'all', level:'all', jobType:'all' };
 let searchTimer;
 
