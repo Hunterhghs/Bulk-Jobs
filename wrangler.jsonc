@@ -9,7 +9,7 @@
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "bulk-jobs-db",
+      "database_name": "bulk-jobs",
       "database_id": "af1b01aa-0c11-49b7-94d2-562521a46ced"
     }
   ],

@@ -7,8 +7,8 @@
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
-    "db:init": "wrangler d1 execute bulk-jobs-db --file=./schema.sql",
-    "db:trigger": "curl -s https://bulk-jobs.hunterhghs.workers.dev/api/trigger"
+    "db:init": "wrangler d1 execute bulk-jobs --file=./schema.sql",
+    "db:trigger": "curl -s https://joblist.hheuristics.com/api/trigger"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250417.0",
